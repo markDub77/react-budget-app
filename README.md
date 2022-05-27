@@ -23,5 +23,14 @@ Node `v18.2.0`
 
 `git remote add origin git@github.com:markDub77/react-budget-app.git`
 
+`git config --global user.email "markwilliams1977@gmail.com"`
+
+`git config --global user.name "Mark Williams" `
+
+`git add .`
+
+`git commit -m "initial commit"`
+
+`git push -u origin main`
 
 ---
