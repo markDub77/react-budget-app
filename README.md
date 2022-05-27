@@ -33,4 +33,6 @@ Node `v18.2.0`
 
 `git push -u origin main`
 
+PHPStorm - ESlint specify node.js interpreter - configure node.js path
+
 ---
