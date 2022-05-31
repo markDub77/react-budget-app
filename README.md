@@ -36,3 +36,41 @@ Node `v18.2.0`
 PHPStorm - ESlint specify node.js interpreter - configure node.js path
 
 ---
+
+Semantic UI does not play well with React 18, so we need to downgrade to React 17:
+   - delete `node_modules` directory
+   - update package.json with:
+     ``` 
+     "react": "^17.0.2"
+     "react-dom": "^17.0.2"
+     ```
+   - Then go to your entry file `index.js` at the top, replace:
+
+        `import ReactDOM from 'react-dom/client'`
+        
+        with
+        
+        `import ReactDOM from 'react-dom';`
+
+
+   - Then in your `index.js` file, replace:
+        
+        ```
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>
+        );
+        ```
+        
+        with
+        
+        ```
+        ReactDOM.render(
+            <React.StrictMode>
+                <App />
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+        ```

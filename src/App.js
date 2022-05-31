@@ -1,10 +1,15 @@
+import { Container, Header, Statistic } from "semantic-ui-react";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">Hello from Budget</header>
-    </div>
+    <Container>
+        <Header as='h1'>Budget</Header>
+        <Statistic size='small'>
+            <Statistic.Label>Your Balance</Statistic.Label>
+            <Statistic.Value>2,267.53</Statistic.Value>
+        </Statistic>
+    </Container>
   );
 }
 
