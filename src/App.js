@@ -1,5 +1,7 @@
 import {
-    Container,
+    Button,
+    ButtonGroup,
+    Container, FormGroup, FormInput,
     Grid,
     GridColumn,
     GridRow,
@@ -7,7 +9,8 @@ import {
     Icon,
     Segment,
     Statistic,
-    StatisticLabel
+    StatisticLabel,
+    Form
 } from "semantic-ui-react";
 import './App.css';
 
@@ -55,6 +58,29 @@ function App() {
                 </GridColumn>
             </Grid>
         </Segment>
+        <Header as='h3'>Add new transaction</Header>
+        <Form unstackable>
+            <FormGroup>
+                <FormInput
+                    icon='tags'
+                    width={12}
+                    label='Description'
+                    placeholder='New shinny thing'
+                />
+                <FormInput
+                    width={4}
+                    label='value'
+                    placeholder='100.00'
+                    icon='dollar'
+                    iconPosition='left'
+                ></FormInput>
+                <ButtonGroup style={{ marginTop: 20 }}>
+                    <Button>Cancel</Button>
+                    <Button.Or />
+                    <Button primary>Ok</Button>
+                </ButtonGroup>
+            </FormGroup>
+        </Form>
     </Container>
   );
 }
