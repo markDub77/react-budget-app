@@ -4,9 +4,8 @@ import EntryLine from "./EntryLine";
 const EntryLines = ({entries}) => (
     entries.map((entry) => (
         <EntryLine
-            description={entry.description}
-            amount={entry.value}
-            isExpense={entry.isExpense}
+            key={entry.id}
+            entry={entry}
         />
     ))
 )
