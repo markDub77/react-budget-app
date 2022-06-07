@@ -1,15 +1,17 @@
 import React from 'react';
-import {Grid, GridColumn, Icon, Segment} from "semantic-ui-react";
+import {Grid, GridColumn, GridRow, Icon, Segment} from "semantic-ui-react";
 
-const EntryLine = ({entry: {id ,description, amount, isExpense = false}}) => (
+const EntryLine = ({id ,description, amount, isExpense = false, deleteEntry}) => (
     <Segment color={isExpense ? 'red' : 'green'}>
         <Grid columns={3} textAlign='right'>
-            <GridColumn width={10} textAlign='left'>{description}</GridColumn>
-            <GridColumn width={3} textAlign='right'>{amount}</GridColumn>
-            <GridColumn width={3}>
-                <Icon name='edit' bordered/>
-                <Icon name='trash' bordered/>
-            </GridColumn>
+            <GridRow>
+                <GridColumn width={10} textAlign='left'>{description}</GridColumn>
+                <GridColumn width={3} textAlign='right'>{amount}</GridColumn>
+                <GridColumn width={3}>
+                    <Icon name='edit' bordered/>
+                    <Icon name='trash' bordered onClick={() => deleteEntry(id)}/>
+                </GridColumn>
+            </GridRow>
         </Grid>
     </Segment>
 );
