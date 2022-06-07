@@ -6,7 +6,7 @@ import MainHeader from "./components/MainHeader";
 import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
-import EntryLine from "./components/EntryLine";
+import EntryLines from "./components/EntryLines";
 import {useState} from "react";
 
 const initialEntries = [
@@ -29,27 +29,20 @@ const initialEntries = [
 
 function App() {
     const [entries, setEntries] = useState(initialEntries)
-  return (
-    <Container>
-        <MainHeader title='Budget' type='h1'/>
-        <DisplayBalance size='small' label='Your Balance' value='2,267.53'/>
+    return (
+        <Container>
+            <MainHeader title='Budget' type='h1'/>
+            <DisplayBalance size='small' label='Your Balance' value='2,267.53'/>
 
-        <DisplayBalances columns='2' textAlign='center' divided />
-        <MainHeader title='History' type='h3' />
+            <DisplayBalances columns='2' textAlign='center' divided />
 
-        {entries.map((entry) => (
-            <EntryLine
-            description={entry.description}
-            amount={entry.value}
-            isExpense={entry.isExpense}
-            />
-            ))}
+            <MainHeader title='History' type='h3' />
+            <EntryLines entries={entries} />
 
-
-        <MainHeader title='Add new transaction' type='h3' />
-        <NewEntryForm />
-    </Container>
-  );
+            <MainHeader title='Add new transaction' type='h3' />
+            <NewEntryForm />
+        </Container>
+    );
 }
 
 export default App;
