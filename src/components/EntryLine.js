@@ -17,7 +17,7 @@ const EntryLine = ({id ,description, value, isExpense = false, deleteEntry}) => 
                     </GridRow>
                 </Grid>
             </Segment>
-            <ModalEdit isOpen={isOpen}/>
+            <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen}/>
         </Fragment>
     )
 };
