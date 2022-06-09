@@ -38,12 +38,13 @@ function App() {
         setEntries(result)
     }
 
-    const addEntry = (description, value) => {
+    const addEntry = (description, value, isExpense) => {
         // noinspection JSCheckFunctionSignatures
         const result = entries.concat({
             id: entries.length + 1,
             description,
-            value
+            value,
+            isExpense
         })
         setEntries(result)
     }
