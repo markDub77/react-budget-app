@@ -39,8 +39,19 @@ function App() {
     const [isOpen, setIsOpen] = useState(false)
 
     const deleteEntry = id => {
-        const result = entries.filter(entry => entry.id !== id)
-        setEntries(result)
+        if (id) {
+            const result = entries.filter(entry => entry.id !== id)
+            setEntries(result)
+        }
+    }
+
+    const editEntry = id => {
+        const index = entries.findIndex(entry => entry.id)
+        const entry = entries[index]
+        setDescription(entry.description)
+        setValue(entry.value)
+        setIsExpense(entry.isExpense)
+        setIsOpen(true)
     }
 
     const addEntry = (description, value, isExpense) => {
@@ -62,7 +73,11 @@ function App() {
             <DisplayBalances columns='2' textAlign='center' divided />
 
             <MainHeader title='History' type='h3' />
-            <EntryLines entries={entries} deleteEntry={deleteEntry} setIsOpen={setIsOpen} />
+            <EntryLines
+                entries={entries}
+                deleteEntry={deleteEntry}
+                editEntry={editEntry}
+            />
 
             <MainHeader title='Add new transaction' type='h3' />
             <NewEntryForm
@@ -74,7 +89,17 @@ function App() {
                 setDescription={setDescription}
                 setIsExpence={setIsExpense}
             />
-            <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <ModalEdit
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                addEntry={addEntry}
+                description={description}
+                value={value}
+                isExpense={isExpense}
+                setValue={setValue}
+                setDescription={setDescription}
+                setIsExpence={setIsExpense}
+            />
         </Container>
     );
 }
