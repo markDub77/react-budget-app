@@ -3,7 +3,8 @@ import { Grid, GridColumn, GridRow, Icon, Segment } from "semantic-ui-react";
 
 const EntryLine = ({id ,description, value, isExpense = false, deleteEntry, editEntry}) => {
 
-    return (<Fragment>
+    return (
+        <Fragment>
             <Segment color={isExpense ? 'red' : 'green'}>
                 <Grid columns={3} textAlign='right'>
                     <GridRow>

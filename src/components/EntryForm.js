@@ -1,8 +1,7 @@
 import React, {Fragment} from 'react';
 import {Checkbox, FormGroup, FormInput, Segment} from "semantic-ui-react";
-import ButtonSaveOrCancel from "./ButtonSaveOrCancel";
 
-const EntryForm = ({description, value, isExpense, setDescription, setValue, setIsExpense, addEntry}) => (
+const EntryForm = ({description, value, isExpense, setDescription, setValue, setIsExpense}) => (
     <Fragment>
         <FormGroup widths={3}>
             <FormInput
@@ -22,12 +21,6 @@ const EntryForm = ({description, value, isExpense, setDescription, setValue, set
                 value={value}
                 onChange={(event) => setValue(event.target.value)}
             ></FormInput>
-            <ButtonSaveOrCancel
-                addEntry={addEntry}
-                description={description}
-                value={value}
-                isExpense={isExpense}
-            />
         </FormGroup>
         <Segment compact>
             <Checkbox

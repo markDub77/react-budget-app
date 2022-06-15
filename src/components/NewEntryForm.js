@@ -1,5 +1,7 @@
 import { Form } from "semantic-ui-react";
 import EntryForm from "./EntryForm";
+import ButtonSaveOrCancel from "./ButtonSaveOrCancel";
+import React from "react";
 
 function NewEntryForm({addEntry, description, value, setValue, setDescription, setIsExpense, isExpense}) {
     return (
@@ -10,8 +12,14 @@ function NewEntryForm({addEntry, description, value, setValue, setDescription, s
                 isExpense={isExpense}
                 setValue={setValue}
                 setDescription={setDescription}
-                setIsExpence={setIsExpense}
+                setIsExpense={setIsExpense}
                 addEntry={addEntry}
+            />
+            <ButtonSaveOrCancel
+                addEntry={addEntry}
+                description={description}
+                value={value}
+                isExpense={isExpense}
             />
         </Form>
     )

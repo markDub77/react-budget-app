@@ -7,7 +7,7 @@ import NewEntryForm from "./components/NewEntryForm";
 import DisplayBalance from "./components/DisplayBalance";
 import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import ModalEdit from "./components/ModalEdit";
 
 const initialEntries = [
@@ -37,6 +37,18 @@ function App() {
     const [value, setValue] = useState('')
     const [isExpense, setIsExpense] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
+    const [entryId, setEntryId] = useState();
+
+    useEffect(() => {
+        if (!isOpen && entryId) {
+            const index = entries.findIndex(entry => entry.id === entryId)
+            const newEntries = [...entries];
+            newEntries[index].description = description;
+            newEntries[index].value = value;
+            newEntries[index].isExpense = isExpense;
+            setEntries(newEntries);
+        }
+    },[isOpen])
 
     const deleteEntry = id => {
         if (id) {
@@ -46,8 +58,9 @@ function App() {
     }
 
     const editEntry = id => {
-        const index = entries.findIndex(entry => entry.id)
+        const index = entries.findIndex(entry => entry.id === id)
         const entry = entries[index]
+        setEntryId(id);
         setDescription(entry.description)
         setValue(entry.value)
         setIsExpense(entry.isExpense)
@@ -87,18 +100,18 @@ function App() {
                 isExpense={isExpense}
                 setValue={setValue}
                 setDescription={setDescription}
-                setIsExpence={setIsExpense}
+                setIsExpense={setIsExpense}
             />
             <ModalEdit
                 isOpen={isOpen}
                 setIsOpen={setIsOpen}
-                addEntry={addEntry}
+                editEntry={editEntry}
                 description={description}
                 value={value}
                 isExpense={isExpense}
                 setValue={setValue}
                 setDescription={setDescription}
-                setIsExpence={setIsExpense}
+                setIsExpense={setIsExpense}
             />
         </Container>
     );
