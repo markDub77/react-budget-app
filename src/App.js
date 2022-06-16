@@ -14,19 +14,19 @@ const initialEntries = [
     {
         id: 1,
         description:'Work income',
-        value:'$1000,00',
+        value: 1000.00,
         isExpense:false
     },
     {
         id: 2,
         description:'Water bill',
-        value:'$20,00',
+        value: 20.00,
         isExpense:true
     },
     {
         id: 3,
         description:'Rent',
-        value:'$300,00',
+        value: 300.00,
         isExpense:true
     }
 ];
@@ -37,7 +37,10 @@ function App() {
     const [value, setValue] = useState('')
     const [isExpense, setIsExpense] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
-    const [entryId, setEntryId] = useState();
+    const [entryId, setEntryId] = useState()
+    const [incomeTotal, setIncomeTotal] = useState(0)
+    const [expenseTotal, setExpenseTotal] = useState(0)
+    const [total, setTotal] = useState(0)
 
     useEffect(() => {
         if (!isOpen && entryId) {
@@ -50,6 +53,21 @@ function App() {
             resetEntry()
         }
     },[isOpen])
+
+    useEffect(() => {
+        let totalIncomes = 0
+        let totalExpenses = 0
+        entries.map(entry => {
+            if (entry.isExpense) {
+                return  totalExpenses += Number(entry.value)
+            }
+            return  totalIncomes += Number(entry.value)
+        })
+        setTotal(totalIncomes - totalExpenses)
+        setExpenseTotal(totalExpenses)
+        setIncomeTotal(totalIncomes)
+
+    }, [entries])
 
     const deleteEntry = id => {
         if (id) {
@@ -88,9 +106,9 @@ function App() {
     return (
         <Container>
             <MainHeader title='Budget' type='h1'/>
-            <DisplayBalance size='small' label='Your Balance' value='2,267.53'/>
+            <DisplayBalance size='small' label='Your Balance' value={total} />
 
-            <DisplayBalances columns='2' textAlign='center' divided />
+            <DisplayBalances incomeTotal={incomeTotal} expenseTotal={expenseTotal} />
 
             <MainHeader title='History' type='h3' />
             <EntryLines
