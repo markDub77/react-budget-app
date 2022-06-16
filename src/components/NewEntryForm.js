@@ -17,9 +17,6 @@ function NewEntryForm({addEntry, description, value, setValue, setDescription, s
             />
             <ButtonSaveOrCancel
                 addEntry={addEntry}
-                description={description}
-                value={value}
-                isExpense={isExpense}
             />
         </Form>
     )

@@ -42,11 +42,12 @@ function App() {
     useEffect(() => {
         if (!isOpen && entryId) {
             const index = entries.findIndex(entry => entry.id === entryId)
-            const newEntries = [...entries];
-            newEntries[index].description = description;
-            newEntries[index].value = value;
-            newEntries[index].isExpense = isExpense;
-            setEntries(newEntries);
+            const newEntries = [...entries]
+            newEntries[index].description = description
+            newEntries[index].value = value
+            newEntries[index].isExpense = isExpense
+            setEntries(newEntries)
+            resetEntry()
         }
     },[isOpen])
 
@@ -60,15 +61,14 @@ function App() {
     const editEntry = id => {
         const index = entries.findIndex(entry => entry.id === id)
         const entry = entries[index]
-        setEntryId(id);
+        setEntryId(id)
         setDescription(entry.description)
         setValue(entry.value)
         setIsExpense(entry.isExpense)
         setIsOpen(true)
     }
 
-    const addEntry = (description, value, isExpense) => {
-        // noinspection JSCheckFunctionSignatures
+    const addEntry = () => {
         const result = entries.concat({
             id: entries.length + 1,
             description,
@@ -76,6 +76,13 @@ function App() {
             isExpense
         })
         setEntries(result)
+        resetEntry()
+    }
+
+    const resetEntry = () => {
+        setDescription('')
+        setValue('')
+        setIsExpense(true)
     }
 
     return (
