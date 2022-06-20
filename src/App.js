@@ -71,11 +71,28 @@ function App() {
 
     }, [entries])
 
-    const store = createStore((state = initialEntries) => {
-        return state
+    const store = createStore((state = initialEntries, action) => {
+        console.log('action', action)
+        switch (action.type) {
+            case 'ADD_ENTRY':
+                const newEntries = entries.concat({
+                    id: 5,
+                    description: 'Hello from Redux',
+                    value: 100,
+                    isExpense: false
+                })
+                return newEntries
+            break
+
+            default:
+                return state
+        }
     })
 
-    console.log('store', store.getState())
+    console.log('store before', store.getState())
+
+    store.dispatch({type: 'ADD_ENTRY'})
+    console.log('store after', store.getState())
 
     const deleteEntry = id => {
         if (id) {
