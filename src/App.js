@@ -9,6 +9,7 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import React, {useEffect, useState} from "react";
 import ModalEdit from "./components/ModalEdit";
+import {createStore} from 'redux';
 
 const initialEntries = [
     {
@@ -69,6 +70,12 @@ function App() {
         setIncomeTotal(totalIncomes)
 
     }, [entries])
+
+    const store = createStore((state = initialEntries) => {
+        return state
+    })
+
+    console.log('store', store.getState())
 
     const deleteEntry = id => {
         if (id) {
