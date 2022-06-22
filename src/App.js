@@ -9,7 +9,7 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import React, {useEffect, useState} from "react";
 import ModalEdit from "./components/ModalEdit";
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 
 const initialEntries = [
     {
@@ -82,7 +82,10 @@ function App() {
         }
     })
 
-    const store = createStore(entriesReducer)
+    const combinedReducers = combineReducers({
+        entries: entriesReducer,
+    })
+    const store = createStore(combinedReducers)
 
     store.subscribe(() => {
         console.log('store: ', store.getState())
