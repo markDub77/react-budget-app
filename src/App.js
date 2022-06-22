@@ -71,8 +71,7 @@ function App() {
 
     }, [entries])
 
-    const store = createStore((state = initialEntries, action) => {
-        console.log('action', action)
+    const entriesReducer = ((state = initialEntries, action) => {
         switch (action.type) {
             case 'ADD_ENTRY':
                 return state.concat({...action.payload})
@@ -82,6 +81,8 @@ function App() {
                 return state
         }
     })
+
+    const store = createStore(entriesReducer)
 
     store.subscribe(() => {
         console.log('store: ', store.getState())
@@ -103,13 +104,8 @@ function App() {
     }
 
     store.dispatch(addEntryRedux(payload_add))
-    store.dispatch(addEntryRedux(payload_add))
-    store.dispatch(addEntryRedux(payload_add))
     store.dispatch(removeEntryRedux(1))
-    store.dispatch(removeEntryRedux(2))
-    store.dispatch(removeEntryRedux(3))
-    store.dispatch(removeEntryRedux(4))
-    store.dispatch(removeEntryRedux(5))
+
 
     const deleteEntry = id => {
         if (id) {
