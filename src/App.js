@@ -9,28 +9,7 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import React, {useEffect, useState} from "react";
 import ModalEdit from "./components/ModalEdit";
-import {createStore, combineReducers} from 'redux';
-
-const initialEntries = [
-    {
-        id: 1,
-        description:'Work income',
-        value: 1000.00,
-        isExpense:false
-    },
-    {
-        id: 2,
-        description:'Water bill',
-        value: 20.00,
-        isExpense:true
-    },
-    {
-        id: 3,
-        description:'Rent',
-        value: 300.00,
-        isExpense:true
-    }
-];
+import {initialEntries} from "./reducers/entries.reducers";
 
 function App() {
     const [entries, setEntries] = useState(initialEntries)
@@ -70,45 +49,6 @@ function App() {
         setIncomeTotal(totalIncomes)
 
     }, [entries])
-
-    const entriesReducer = ((state = initialEntries, action) => {
-        switch (action.type) {
-            case 'ADD_ENTRY':
-                return state.concat({...action.payload})
-            case 'REMOVE_ENTRY':
-                return state.filter(entry => entry.id !== action.payload.id)
-            default:
-                return state
-        }
-    })
-
-    const combinedReducers = combineReducers({
-        entries: entriesReducer,
-    })
-    const store = createStore(combinedReducers)
-
-    store.subscribe(() => {
-        console.log('store: ', store.getState())
-    })
-
-    const payload_add = {
-        id: 5,
-        description: 'Hello from Redux',
-        value: 100,
-        isExpense: false
-    }
-
-    function addEntryRedux(payload) {
-        return {type: 'ADD_ENTRY', payload}
-    }
-
-    function removeEntryRedux(id) {
-        return {type: 'REMOVE_ENTRY', payload: { id } }
-    }
-
-    store.dispatch(addEntryRedux(payload_add))
-    store.dispatch(removeEntryRedux(1))
-
 
     const deleteEntry = id => {
         if (id) {
