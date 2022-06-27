@@ -12,19 +12,19 @@ export const entriesReducer = (state = initialEntries, action) => {
 export const initialEntries = [
     {
         id: 1,
-        description:'Work income',
+        description:'Work income redux',
         value: 1000.00,
         isExpense:false
     },
     {
         id: 2,
-        description:'Water bill',
+        description:'Water bill redux',
         value: 20.00,
         isExpense:true
     },
     {
         id: 3,
-        description:'Rent',
+        description:'Rent redux',
         value: 300.00,
         isExpense:true
     }
