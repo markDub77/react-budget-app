@@ -9,20 +9,18 @@ import DisplayBalances from "./components/DisplayBalances";
 import EntryLines from "./components/EntryLines";
 import React, {useEffect, useState} from "react";
 import ModalEdit from "./components/ModalEdit";
-import {initialEntries} from "./reducers/entries.reducers";
 import {useSelector} from 'react-redux'
 
 function App() {
-    const [entries, setEntries] = useState(initialEntries)
     const [description, setDescription] = useState('')
     const [value, setValue] = useState('')
     const [isExpense, setIsExpense] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
-    const [entryId, setEntryId] = useState()
+    const [entryId] = useState()
     const [incomeTotal, setIncomeTotal] = useState(0)
     const [expenseTotal, setExpenseTotal] = useState(0)
     const [total, setTotal] = useState(0)
-    const entriesRedux = useSelector(state => state.entries)
+    const entries = useSelector(state => state.entries)
 
     useEffect(() => {
         if (!isOpen && entryId) {
@@ -31,7 +29,6 @@ function App() {
             newEntries[index].description = description
             newEntries[index].value = value
             newEntries[index].isExpense = isExpense
-            setEntries(newEntries)
             resetEntry()
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,17 +49,9 @@ function App() {
 
     }, [entries])
 
-    const deleteEntry = id => {
-        if (id) {
-            const result = entries.filter(entry => entry.id !== id)
-            setEntries(result)
-        }
-    }
-
     const editEntry = id => {
         const index = entries.findIndex(entry => entry.id === id)
         const entry = entries[index]
-        setEntryId(id)
         setDescription(entry.description)
         setValue(entry.value)
         setIsExpense(entry.isExpense)
@@ -76,7 +65,6 @@ function App() {
             value,
             isExpense
         })
-        setEntries(result)
         resetEntry()
     }
 
@@ -95,8 +83,7 @@ function App() {
 
             <MainHeader title='History' type='h3' />
             <EntryLines
-                entries={entriesRedux}
-                deleteEntry={deleteEntry}
+                entries={entries}
                 editEntry={editEntry}
             />
 
