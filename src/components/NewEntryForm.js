@@ -4,6 +4,7 @@ import { Form } from "semantic-ui-react";
 import ButtonSaveOrCancel from "./ButtonSaveOrCancel";
 import EntryForm from "./EntryForm";
 import {addEntryRedux} from "../actions/entries.actions";
+import {v4 as uuidv4} from "uuid";
 
 function NewEntryForm() {
     const [description, setDescription] = useState('')
@@ -13,7 +14,7 @@ function NewEntryForm() {
 
     function addEntry() {
         dispatch(addEntryRedux({
-            id: 5,
+            id: uuidv4(),
             description,
             value,
             isExpense
@@ -22,7 +23,6 @@ function NewEntryForm() {
         setValue('')
         setIsExpense(true)
     }
-
 
     return (
         <Form unstackable>
