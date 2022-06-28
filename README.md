@@ -74,3 +74,15 @@ Semantic UI does not play well with React 18, so we need to downgrade to React 1
             document.getElementById('root')
         );
         ```
+     
+---
+Install React Developer Tools
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en
+
+and
+
+Install Redux DevTools
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+
+
+
