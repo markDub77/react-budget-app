@@ -4,6 +4,11 @@ export const entriesReducer = (state = initialEntries, action) => {
             return state.concat({...action.payload})
         case 'REMOVE_ENTRY':
             return state.filter(entry => entry.id !== action.payload.id)
+        case 'UPDATE_ENTRY':
+            const newEntries = [...state]
+            const index = newEntries.findIndex(entry => entry.id === action.payload.id)
+            newEntries[index] = { ...action.payload.entry }
+            return newEntries
         default:
             return state
     }
